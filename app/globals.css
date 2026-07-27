@@ -1,0 +1,606 @@
+@import "tailwindcss";
+
+/* ============================================================
+   DARK MODE: class-based (bukan media query)
+   Situs lama mengontrol dark mode lewat class .dark di <html>,
+   disimpan ke localStorage, jadi kita pertahankan strategi ini
+   alih-alih default Tailwind v4 yang berbasis prefers-color-scheme.
+   ============================================================ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter), "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* ============================================================
+   NAVBAR LINK STATES
+   Porting dari includes/header.php (style inline lama)
+   ============================================================ */
+.nav-link {
+  color: #4b5563;
+  transition: all 0.2s ease;
+}
+.dark .nav-link {
+  color: #d1d5db;
+}
+.nav-link:hover {
+  color: #2563eb;
+}
+.dark .nav-link:hover {
+  color: #facc15;
+}
+.nav-link.active {
+  color: #2563eb !important;
+  font-weight: 800;
+}
+.dark .nav-link.active {
+  color: #facc15 !important;
+}
+
+/* ============================================================
+   FOOTER LIST RESET
+   Mencegah bullet/icon bocor dari override halaman lain
+   ============================================================ */
+footer ul li::before {
+  display: none !important;
+  content: none !important;
+}
+footer ul li {
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+
+/* ============================================================
+   NAVBAR SCROLLED STATE (efek blur saat discroll)
+   ============================================================ */
+.navbar-scrolled {
+  background: rgba(255, 255, 255, 0.97) !important;
+  backdrop-filter: blur(16px) !important;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08) !important;
+}
+.dark .navbar-scrolled {
+  background: rgba(15, 23, 42, 0.97) !important;
+}
+
+/* ============================================================
+   BERANDA: Glassmorphism card
+   ============================================================ */
+.glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.dark .glass-card {
+  background: rgba(30, 41, 59, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================================
+   TRANSISI HALAMAN: dipakai oleh app/(public)/template.tsx.
+   template.tsx otomatis "remount" setiap pindah rute di App
+   Router, jadi animasi ini otomatis replay tiap navigasi.
+   ============================================================ */
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.page-transition {
+  animation: pageFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   SKELETON LOADING: utility shimmer, dipakai bersama di semua
+   loading.tsx & skeleton state (GTK, Beranda, Berita, dst)
+   ============================================================ */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: rgb(229 231 235); /* gray-200 */
+}
+.dark .skeleton {
+  background-color: rgb(51 65 85); /* slate-700 */
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.45),
+    transparent
+  );
+  animation: skeletonShimmer 1.6s ease-in-out infinite;
+}
+.dark .skeleton::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+}
+@keyframes skeletonShimmer {
+  100% { transform: translateX(100%); }
+}
+/* Hormati preferensi pengguna yang sensitif terhadap animasi */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   BERANDA: Animasi staggered scroll-in untuk kartu
+   ============================================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.card-animate {
+  opacity: 0;
+  animation: fadeUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.card-hover {
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================================
+   BERANDA: Blob animation (hero background)
+   ============================================================ */
+@keyframes blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+.animate-blob { animation: blob 7s infinite; }
+.animation-delay-2000 { animation-delay: 2s; }
+.animation-delay-4000 { animation-delay: 4s; }
+
+/* ============================================================
+   BERANDA: Floating icon background (hero)
+   ============================================================ */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+.float-icon {
+  animation: float 6s ease-in-out infinite;
+  opacity: 0.1;
+  position: absolute;
+  font-size: 200px;
+  line-height: 1;
+}
+.float-icon-1 { animation-delay: 0s; top: -60px; left: -40px; }
+.float-icon-2 { animation-delay: 2s; bottom: -60px; right: -40px; }
+.float-icon-3 { animation-delay: 4s; top: 50%; right: 10%; font-size: 150px; }
+
+/* ============================================================
+   BERANDA: Counter animation entrance
+   ============================================================ */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.counter { animation: countUp 0.6s ease-out; }
+
+/* ============================================================
+   BERANDA: Scroll indicator hero
+   ============================================================ */
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  50% { transform: translateX(-50%) translateY(8px); opacity: 0.5; }
+}
+.scroll-indicator {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollBounce 1.8s ease-in-out infinite;
+  z-index: 20;
+}
+
+/* ============================================================
+   BERANDA: Visi & Misi card
+   ============================================================ */
+.visi-misi-card {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 1.75rem;
+  border: 1px solid rgb(243 244 246);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  transition: box-shadow 0.3s ease;
+}
+.dark .visi-misi-card {
+  background: rgb(17 24 39);
+  border-color: rgb(55 65 81);
+}
+.visi-misi-card:hover {
+  box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.1);
+}
+
+/* ============================================================
+   BERANDA: Agenda list item (kalender akademik mini)
+   ============================================================ */
+.agenda-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem 1rem;
+  border-radius: 1rem;
+  background: white;
+  border: 1px solid rgb(243 244 246);
+  transition: all 0.2s ease;
+}
+.dark .agenda-item {
+  background: rgb(31 41 55);
+  border-color: rgb(55 65 81);
+}
+.agenda-item:hover {
+  border-color: rgb(134 239 172);
+  box-shadow: 0 4px 10px -2px rgb(0 0 0 / 0.06);
+}
+.agenda-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 0.75rem;
+  background: rgb(240 253 244);
+  border: 1px solid rgb(187 247 208);
+  flex-shrink: 0;
+}
+.dark .agenda-date {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.3);
+}
+.agenda-date .day {
+  font-size: 0.875rem;
+  font-weight: 900;
+  line-height: 1;
+  color: rgb(21 128 61);
+}
+.dark .agenda-date .day { color: rgb(74 222 128); }
+.agenda-date .month {
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: rgb(34 197 94);
+}
+
+/* ============================================================
+   BERANDA: Galeri grid preview (kalender akademik section)
+   ============================================================ */
+.galeri-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+@media (max-width: 640px) {
+  .galeri-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.galeri-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  cursor: pointer;
+  background: rgb(243 244 246);
+}
+.dark .galeri-item { background: rgb(31 41 55); }
+.galeri-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.galeri-item:hover img { transform: scale(1.1); }
+.galeri-item .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.galeri-item:hover .overlay { opacity: 1; }
+
+/* ============================================================
+   BERANDA: Tab filter berita
+   ============================================================ */
+.tab-btn {
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  white-space: nowrap;
+  color: rgb(107 114 128);
+  background: white;
+  border: 1px solid rgb(229 231 235);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.dark .tab-btn {
+  color: rgb(156 163 175);
+  background: rgb(31 41 55);
+  border-color: rgb(55 65 81);
+}
+.tab-btn:hover {
+  border-color: rgb(96 165 250);
+  color: rgb(37 99 235);
+}
+.tab-btn.active {
+  background: rgb(37 99 235);
+  border-color: rgb(37 99 235);
+  color: white;
+  box-shadow: 0 4px 10px -2px rgba(37, 99, 235, 0.4);
+}
+
+/* ============================================================
+   BERANDA: Ekstrakurikuler grid + kartu
+   ============================================================ */
+.ekskul-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+@media (max-width: 768px) {
+  .ekskul-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.ekskul-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  border-radius: 1.25rem;
+  background: white;
+  border: 1px solid rgb(243 244 246);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+}
+.dark .ekskul-card {
+  background: rgb(31 41 55);
+  border-color: rgb(55 65 81);
+}
+.ekskul-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+}
+.ekskul-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/* ============================================================
+   BERANDA: Testimoni grid
+   ============================================================ */
+.testimonial-track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+@media (max-width: 1024px) {
+  .testimonial-track { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .testimonial-track { grid-template-columns: 1fr; }
+}
+.testimonial-card {
+  background: white;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  border: 1px solid rgb(243 244 246);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+.dark .testimonial-card {
+  background: rgb(31 41 55);
+  border-color: rgb(55 65 81);
+}
+
+/* ============================================================
+   BERITA: Featured card hover zoom
+   ============================================================ */
+.featured-card img {
+  transition: transform 0.7s ease;
+}
+.featured-card:hover img {
+  transform: scale(1.04);
+}
+
+/* ============================================================
+   BERITA: Pagination buttons
+   ============================================================ */
+.page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  padding: 0 0.5rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: rgb(75 85 99);
+  background: white;
+  border: 1px solid rgb(229 231 235);
+  transition: all 0.2s ease;
+}
+.dark .page-btn {
+  color: rgb(209 213 219);
+  background: rgb(31 41 55);
+  border-color: rgb(55 65 81);
+}
+.page-btn:hover:not(.disabled) {
+  border-color: rgb(96 165 250);
+  color: rgb(37 99 235);
+}
+.page-btn.active {
+  background: rgb(37 99 235);
+  border-color: rgb(37 99 235);
+  color: white;
+}
+.page-btn.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ============================================================
+   PROFIL: Anchor nav (sticky scrollspy)
+   ============================================================ */
+.anchor-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+  color: rgb(107 114 128);
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+.dark .anchor-btn {
+  color: rgb(156 163 175);
+}
+.anchor-btn:hover {
+  color: rgb(37 99 235);
+}
+.anchor-btn.active {
+  color: rgb(37 99 235);
+  border-bottom-color: rgb(37 99 235);
+}
+.dark .anchor-btn.active {
+  color: rgb(96 165 250);
+  border-bottom-color: rgb(96 165 250);
+}
+@media (max-width: 480px) {
+  .anchor-label { display: none; }
+  .anchor-btn { padding: 0.875rem 0.75rem; }
+}
+
+/* ============================================================
+   PROFIL: Visi & Misi card (full version, beda dari teaser beranda)
+   ============================================================ */
+.visi-card, .misi-card {
+  background: white;
+  border-radius: 1.5rem;
+  border: 1px solid rgb(243 244 246);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+.dark .visi-card, .dark .misi-card {
+  background: rgb(17 24 39);
+  border-color: rgb(55 65 81);
+}
+
+/* ============================================================
+   PROFIL: Timeline sejarah (fallback jika foto_sejarah kosong)
+   ============================================================ */
+.timeline {
+  position: relative;
+  padding-left: 1.5rem;
+  border-left: 2px solid rgb(229 231 235);
+}
+.dark .timeline {
+  border-left-color: rgb(55 65 81);
+}
+.timeline-item {
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+.timeline-dot {
+  position: absolute;
+  left: -1.6875rem;
+  top: 0.25rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: rgb(37 99 235);
+  border: 2px solid white;
+}
+.dark .timeline-dot {
+  border-color: rgb(17 24 39);
+}
+
+/* ============================================================
+   GALERI: Search wrapper (icon absolute di dalam input)
+   ============================================================ */
+.search-wrap {
+  position: relative;
+}
+.search-wrap > i {
+  position: absolute;
+  left: 0.875rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgb(156 163 175);
+  font-size: 0.875rem;
+  pointer-events: none;
+}
+
+/* ============================================================
+   GALERI: Photo grid (masonry-like, responsive columns)
+   ============================================================ */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+@media (min-width: 640px) {
+  .photo-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+}
+@media (min-width: 1024px) {
+  .photo-grid { grid-template-columns: repeat(4, 1fr); }
+}
