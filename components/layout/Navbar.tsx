@@ -142,16 +142,16 @@ export default function Navbar({ namaSekolah, logoSekolah, pengaturan }: NavbarP
 
     return (
       <Link
-  key={item.href}
-  href={item.href}
-  className={`text-[14.5px] font-semibold py-2 px-1 transition-colors ${
-    active
-      ? "text-gold"
-      : "text-ink dark:text-gray-200 hover:text-gold"
-  }`}
->
-  {item.label}
-</Link>
+        key={item.href}
+        href={item.href}
+        className={`flex items-center gap-2 text-[14.5px] font-semibold py-2 px-1 transition-colors ${
+          active
+            ? "text-gold"
+            : "text-ink dark:text-gray-200 hover:text-gold"
+        }`}
+      >
+        {item.label}
+      </Link>
     );
   })}
 </div>
@@ -197,15 +197,15 @@ export default function Navbar({ namaSekolah, logoSekolah, pengaturan }: NavbarP
                 const active = isActive(pathname, item);
                 return (
                   <Link
-  key={item.href}
-  href={item.href}
-  onClick={() => setMobileOpen(false)}
-  className={`block px-3 py-3 rounded-md font-semibold ${
-    active ? "text-gold" : "text-ink dark:text-gray-200"
-  }`}
->
-  {item.label}
-</Link>
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={`flex items-center gap-3 px-3 py-3 rounded-md font-semibold ${
+                      active ? "text-gold" : "text-ink dark:text-gray-200"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
                 );
               })}
               <Link
