@@ -50,7 +50,7 @@ export default function GaleriHero({ title, description, showBackButton }: Galer
           >
             <i className="fa-solid fa-camera" />
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-tight drop-shadow-2xl flex items-center justify-center gap-3">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-black text-white leading-tight drop-shadow-2xl flex items-center justify-center gap-3">
             {showBackButton && (
               <Link
                 href="/galeri"

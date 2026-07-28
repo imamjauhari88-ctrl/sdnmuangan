@@ -31,7 +31,7 @@ export default function PrestasiTerbaru({ prestasi }: PrestasiTerbaruProps) {
             >
               🏆 Kebanggaan Kami
             </span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 dark:text-white">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-black text-gray-900 dark:text-white">
               Prestasi Terkini
             </h2>
             <div className="h-1 w-20 bg-gradient-to-r from-amber-500 to-yellow-400 rounded-full mt-3" />

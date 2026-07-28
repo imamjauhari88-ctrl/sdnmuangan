@@ -555,6 +555,23 @@ yang jelas (`error.code === "23505"`) alih-alih pesan generik "gagal menyimpan".
   loop/map atas hasil `.select()` (lihat contoh di `lib/data/pengaturan.ts`).
   Ini menghindari kasus TypeScript meng-infer `never` saat ada banyak layer
   generic (client wrapper + opsi `auth`).
+- **Konvensi warna aksen** (biar konsisten pas nambah fitur baru, jangan asal pilih warna Tailwind):
+  - `teal` — brand/identitas resmi sekolah. Dipakai di Navbar, Footer, Hero (background gelap
+    & elemen utama). Jangan dipakai untuk hal lain di luar identitas situs.
+  - `amber` — dua peran: (1) aksen/CTA yang duduk di atas `teal` (contoh: tombol utama di Hero,
+    sama seperti `.nav-link.active` di dark mode), dan (2) warna hover ikon **Edit** di
+    hampir semua tabel admin (`BeritaTable`, `EkskulTable`, `FasilitasTable`, `GtkTable`,
+    `HariLiburTable`, `TahunAjaranTable`). Ikon aksi tabel admin sudah konsisten: lihat = biru,
+    edit = amber, hapus = merah — ikuti pola ini kalau bikin tabel admin baru.
+  - `green` — status "aktif" / positif di admin (dipakai di `GtkTable`, `TahunAjaranTable`,
+    `HariLiburTable`). Konsisten, jangan diganti `emerald` untuk makna yang sama.
+  - `emerald` — hanya dekoratif di komponen publik/beranda (variasi warna per kartu di
+    `Statistik`, dll), tidak pernah dipakai untuk status di admin. Kalau butuh warna hijau
+    untuk **status**, pakai `green`, bukan `emerald`.
+  - Warna kategori konten (badge kategori berita di `BeritaTable`/`KATEGORI_BADGE`, warna
+    kartu di `lib/utils/warna.ts` / `WARNA_MAP`) itu sistem terpisah — dipakai untuk membedakan
+    jenis konten (kategori berita, warna fasilitas custom, dll), **bukan** bagian dari
+    konvensi brand/status di atas. Jangan disatukan/diseragamkan ke satu token warna.
 
 ## Deploy ke Vercel
 

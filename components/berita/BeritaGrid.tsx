@@ -1,19 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
-import { formatTanggalIndonesia, ringkasTeks, KATEGORI_LABEL } from "@/lib/utils/format";
-import type { Berita, BeritaKategori } from "@/lib/types/database";
+import { formatTanggalIndonesia, ringkasTeks, KATEGORI_LABEL, KATEGORI_BADGE_BG } from "@/lib/utils/format";
+import type { Berita } from "@/lib/types/database";
 
 interface BeritaGridProps {
   items: Berita[];
   cariActive: string;
 }
-
-const BADGE_BG: Record<BeritaKategori, string> = {
-  berita: "#2563eb",
-  pengumuman: "#dc2626",
-  agenda: "#16a34a",
-  prestasi: "#d97706",
-};
 
 export default function BeritaGrid({ items, cariActive }: BeritaGridProps) {
   if (items.length === 0) {
@@ -44,7 +37,7 @@ export default function BeritaGrid({ items, cariActive }: BeritaGridProps) {
     >
       {items.map((b, i) => {
         const img = b.gambar || "https://placehold.co/600x400/e2e8f0/1e293b?text=Berita";
-        const badgeBg = BADGE_BG[b.kategori] ?? "#6b7280";
+        const badgeBg = KATEGORI_BADGE_BG[b.kategori] ?? "#6b7280";
         const badgeLabel = KATEGORI_LABEL[b.kategori] ?? b.kategori;
 
         return (

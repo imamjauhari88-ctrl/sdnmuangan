@@ -90,7 +90,7 @@ export default function Navbar({ namaSekolah, logoSekolah }: NavbarProps) {
               <ThemeToggle variant="desktop" />
               <Link
   href="/admin/login"
-  className="p-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-all shadow-md"
+  className="p-2 rounded-lg bg-teal-700 text-white hover:bg-teal-800 transition-all shadow-md"
   title="Login Admin"
   aria-label="Login Admin"
 >
@@ -123,7 +123,7 @@ export default function Navbar({ namaSekolah, logoSekolah }: NavbarProps) {
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
                 className={`nav-link flex items-center gap-3 px-3 py-3 rounded-md ${
-                  isActive(pathname, item) ? "active bg-blue-50 dark:bg-gray-700" : ""
+                  isActive(pathname, item) ? "active bg-teal-50 dark:bg-gray-700" : ""
                 }`}
               >
                 <i className={`fa-solid ${item.icon} w-5`} /> {item.label}
@@ -132,7 +132,7 @@ export default function Navbar({ namaSekolah, logoSekolah }: NavbarProps) {
             <Link
               href="/admin/login"
               onClick={() => setMobileOpen(false)}
-              className="w-full text-left flex items-center gap-3 px-3 py-3 rounded-md text-blue-600 dark:text-blue-400 font-bold hover:bg-blue-50 dark:hover:bg-gray-700 transition"
+              className="w-full text-left flex items-center gap-3 px-3 py-3 rounded-md text-teal-700 dark:text-teal-400 font-bold hover:bg-teal-50 dark:hover:bg-gray-700 transition"
             >
               <i className="fa-solid fa-user-shield w-5" /> Login Admin
             </Link>

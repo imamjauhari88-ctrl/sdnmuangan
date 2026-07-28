@@ -38,7 +38,7 @@ export default function ContactHero({ namaSekolah }: ContactHeroProps) {
           <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-3xl sm:text-4xl text-white shadow-lg hover:scale-110 transition-transform duration-300">
             <i className="fa-solid fa-headset" />
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-black text-white leading-tight drop-shadow-lg">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-serif font-black text-white leading-tight drop-shadow-lg">
             Hubungi Kami
           </h1>
         </div>

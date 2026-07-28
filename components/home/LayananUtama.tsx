@@ -9,13 +9,13 @@ const LAYANAN = [
     desc: "Pendaftaran siswa baru secara online.",
   },
   {
-  href: "https://absensdnmuangan.vercel.app",
-  icon: "fa-qrcode",
-  color: "bg-emerald-600",
-  title: "Absensi Siswa",
-  desc: "Sistem absensi siswa berbasis QR Code yang cepat, mudah, dan akurat.",
-  external: true,
-},
+    href: "https://uptdsdntamansareh2-cat.fwh.is/",
+    icon: "fa-diagram-project",
+    color: "bg-emerald-600",
+    title: "Platform Terintegrasi",
+    desc: "Akses sistem CBT/ujian online dan Absensi siswa.",
+    external: true,
+  },
   {
     href: "/kontak",
     icon: "fa-envelope-open-text",
@@ -28,7 +28,8 @@ const LAYANAN = [
 export default function LayananUtama() {
   return (
     <section
-      className="py-12 sm:py-16 md:py-20 bg-white dark:bg-gray-950 border-t border-gray-100 dark:border-gray-800"
+      id="layanan-utama"
+      className="py-12 sm:py-16 md:py-20 bg-white dark:bg-gray-950 border-t border-gray-100 dark:border-gray-800 scroll-mt-16"
       aria-label="Layanan utama sekolah"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,7 +40,7 @@ export default function LayananUtama() {
           >
             🔗 Akses Cepat
           </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-serif font-black text-gray-900 dark:text-white">
             Layanan Utama
           </h2>
           <div className="h-1 w-16 bg-gradient-to-r from-cyan-500 to-blue-400 mx-auto rounded-full mt-3" />

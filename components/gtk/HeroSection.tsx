@@ -30,7 +30,7 @@ export default function HeroSection({ namaSekolah, stats, isLoading = false }: H
         <div className="w-16 h-16 mx-auto rounded-2xl bg-white/20 border border-white/30 flex items-center justify-center text-4xl text-white mb-5 shadow-lg">
           <i className="fa-solid fa-chalkboard-user"></i>
         </div>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-4 leading-tight drop-shadow-2xl">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-black text-white mb-4 leading-tight drop-shadow-2xl">
           Guru &amp; Tenaga <br className="sm:hidden" /> Kependidikan
         </h1>
         <p className="text-lg text-blue-100 max-w-2xl mx-auto mb-8 font-light leading-relaxed">

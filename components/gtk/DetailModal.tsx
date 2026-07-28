@@ -65,7 +65,7 @@ export default function DetailModal({ selectedGtk, onClose }: DetailModalProps) 
               {selectedGtk._inisial}
             </div>
           </div>
-          <h2 className="text-xl font-black text-gray-900 dark:text-white leading-tight mb-1">{selectedGtk.nama}</h2>
+          <h2 className="text-xl font-serif font-black text-gray-900 dark:text-white leading-tight mb-1">{selectedGtk.nama}</h2>
           <span className={`text-sm font-bold px-4 py-1.5 rounded-full ${c.badge}`}>
             {selectedGtk.jabatan}
           </span>

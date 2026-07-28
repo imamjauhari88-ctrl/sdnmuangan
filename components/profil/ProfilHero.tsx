@@ -43,7 +43,7 @@ export default function ProfilHero({
           <i className="fa-solid fa-school" />
         </div>
 
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-4 leading-tight drop-shadow-2xl">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-black text-white mb-4 leading-tight drop-shadow-2xl">
           Profil Sekolah
         </h1>
         <p className="text-lg text-blue-100 max-w-2xl mx-auto mb-8 font-light leading-relaxed">

@@ -8,46 +8,46 @@
  * pas cache kosong/lagi di-refresh — bukan tiap kali halaman dibuka.
  *
  * Karena Beranda punya banyak sekali section, skeleton di bawah
- * dibuat representatif untuk section-section utama (Hero, Statistik,
- * grid berita/prestasi) dan generik untuk sisanya — bukan niru
- * detail semua 14 section satu-satu.
+ * dibuat representatif untuk section-section utama (Hero — termasuk
+ * panel statistiknya, grid berita/prestasi) dan generik untuk sisanya
+ * — bukan niru detail semua section satu-satu.
  */
 export default function BerandaLoading() {
   return (
     <div aria-busy="true" aria-label="Memuat halaman beranda">
       {/* HERO */}
-      <section className="relative min-h-screen sm:min-h-[90vh] w-full flex items-center justify-center overflow-hidden bg-gradient-to-br from-cyan-900 via-blue-900 to-indigo-950">
-        <div className="relative z-10 max-w-5xl mx-auto w-full text-center py-12 sm:py-0 px-4">
-          <div className="skeleton h-8 w-56 rounded-full mx-auto mb-8 bg-white/10" />
-          <div className="skeleton h-4 w-40 rounded-md mx-auto mb-3 bg-white/10" />
-          <div className="skeleton h-12 sm:h-16 w-full max-w-2xl rounded-xl mx-auto mb-6 bg-white/10" />
-          <div className="skeleton h-6 w-2/3 max-w-lg rounded-md mx-auto mb-4 bg-white/10" />
-          <div className="skeleton h-4 w-full max-w-xl rounded-md mx-auto mb-12 bg-white/10" />
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <div className="skeleton h-14 w-full sm:w-48 rounded-xl bg-white/10" />
-            <div className="skeleton h-14 w-full sm:w-48 rounded-xl bg-white/10" />
-          </div>
-        </div>
-      </section>
-
-      {/* STATISTIK */}
-      <section className="py-12 sm:py-16 md:py-20 bg-gray-50 dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10 sm:mb-16">
-            <div className="skeleton h-6 w-28 rounded-full mx-auto mb-4" />
-            <div className="skeleton h-9 w-64 rounded-lg mx-auto" />
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {Array.from({ length: 4 }).map((_, i) => (
-              <div
-                key={i}
-                className="glass-card p-6 sm:p-8 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm flex flex-col items-center"
-              >
-                <div className="skeleton w-14 sm:w-16 h-14 sm:h-16 rounded-2xl mb-4 sm:mb-6" />
-                <div className="skeleton h-9 w-16 rounded-md mb-2" />
-                <div className="skeleton h-3 w-20 rounded-md" />
+      <section className="relative w-full overflow-hidden bg-gradient-to-br from-teal-950 via-teal-900 to-slate-950">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 py-16 sm:py-20 lg:py-24">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16">
+            {/* KIRI: badge, judul, deskripsi, tombol */}
+            <div className="flex-1 flex flex-col items-center lg:items-start">
+              <div className="flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 mb-6">
+                {Array.from({ length: 4 }).map((_, i) => (
+                  <div key={i} className="skeleton h-7 w-24 sm:w-28 rounded-full bg-white/10" />
+                ))}
               </div>
-            ))}
+              <div className="skeleton h-9 sm:h-11 w-full max-w-md rounded-xl mb-3 bg-white/10" />
+              <div className="skeleton h-9 sm:h-11 w-2/3 max-w-[14rem] rounded-xl mb-5 bg-white/10" />
+              <div className="skeleton h-4 w-full max-w-xl rounded-md mb-2 bg-white/10" />
+              <div className="skeleton h-4 w-3/4 max-w-md rounded-md mb-8 bg-white/10" />
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+                <div className="skeleton h-12 w-full sm:w-40 rounded-lg bg-white/10" />
+                <div className="skeleton h-12 w-full sm:w-40 rounded-lg bg-white/10" />
+              </div>
+            </div>
+
+            {/* KANAN: panel data pokok sekolah */}
+            <div className="lg:pl-12 lg:border-l lg:border-white/15 w-full lg:w-auto">
+              <div className="skeleton h-3 w-36 rounded-md mx-auto lg:mx-0 mb-5 bg-white/10" />
+              <div className="grid grid-cols-2 gap-x-8 gap-y-6 sm:gap-x-10 sm:gap-y-8">
+                {Array.from({ length: 4 }).map((_, i) => (
+                  <div key={i} className="flex flex-col items-center lg:items-start">
+                    <div className="skeleton h-9 w-14 rounded-md mb-2 bg-white/10" />
+                    <div className="skeleton h-3 w-20 rounded-md bg-white/10" />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

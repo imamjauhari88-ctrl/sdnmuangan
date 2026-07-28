@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Lora } from "next/font/google";
 import "./globals.css";
 import { getPengaturan, pengaturanValue } from "@/lib/data/pengaturan";
 import { cldTransform } from "@/lib/utils/cloudinary";
@@ -10,6 +10,17 @@ const inter = Inter({
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
   variable: "--font-inter",
+});
+
+// Font serif untuk heading (h1/h2) di seluruh situs — dipasangkan dengan
+// Inter (body/nav/label) supaya heading berasa lebih formal/khas sekolah,
+// tanpa ganti font utama. Dipakai lewat utility `font-serif` (lihat
+// mapping --font-serif di globals.css).
+const lora = Lora({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  display: "swap",
+  variable: "--font-heading",
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -103,7 +114,7 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`h-full antialiased ${inter.variable}`}
+      className={`h-full antialiased ${inter.variable} ${lora.variable}`}
       suppressHydrationWarning
     >
       <head>

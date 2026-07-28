@@ -66,7 +66,7 @@ export default async function BeritaPage({ searchParams }: BeritaPageProps) {
             >
               📰 Seputar Sekolah
             </span>
-            <h2 className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white mb-3">
+            <h2 className="text-3xl sm:text-4xl font-serif font-black text-gray-900 dark:text-white mb-3">
               Publikasi Terbaru
             </h2>
             <div className="h-1 w-16 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto rounded-full" />

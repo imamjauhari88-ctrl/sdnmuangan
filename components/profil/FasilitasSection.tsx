@@ -53,7 +53,7 @@ export default function FasilitasSection({ fasilitasList }: FasilitasSectionProp
           >
             🏫 Sarana &amp; Prasarana
           </span>
-          <h2 className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white mb-3">
+          <h2 className="text-3xl sm:text-4xl font-serif font-black text-gray-900 dark:text-white mb-3">
             Fasilitas Sekolah
           </h2>
           {fasilitasList.length > 0 && (

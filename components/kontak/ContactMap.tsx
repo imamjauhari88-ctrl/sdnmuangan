@@ -12,7 +12,7 @@ export default function ContactMap({ koordinatMap, alamat, linkGmaps }: ContactM
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center mb-8 sm:mb-10">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-gray-800 dark:text-white flex items-center justify-center gap-3">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-serif font-black text-gray-800 dark:text-white flex items-center justify-center gap-3">
             <div className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/50 flex items-center justify-center text-red-600 dark:text-red-400">
               <i className="fa-solid fa-map-location-dot" />
             </div>

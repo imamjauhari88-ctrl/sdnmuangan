@@ -17,6 +17,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter), "Segoe UI", system-ui, sans-serif;
+  --font-serif: var(--font-heading), Georgia, "Times New Roman", serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
@@ -32,6 +33,25 @@ body {
 }
 
 /* ============================================================
+   FONT JUDUL vs ISI (global)
+   Pola yang sudah berjalan di ~37 komponen: h1 & h2 pakai font
+   judul (Lora, var(--font-serif)), sisanya (h3-h6, teks isi) ikut
+   font body (Inter) dari <body> di atas.
+
+   Aturan ini bikin pola tsb otomatis berlaku ke SEMUA h1/h2 di
+   seluruh situs (termasuk app/admin/** yang sebelumnya 0% pakai
+   font judul), tanpa perlu tambah className "font-serif" manual
+   di tiap komponen. Kalau ada h1/h2 yang sengaja mau tetap pakai
+   font isi, tinggal kasih className="font-sans" langsung di
+   elemen itu — class selector lebih spesifik daripada tag
+   selector di bawah ini jadi otomatis menang.
+   ============================================================ */
+h1,
+h2 {
+  font-family: var(--font-serif);
+}
+
+/* ============================================================
    NAVBAR LINK STATES
    Porting dari includes/header.php (style inline lama)
    ============================================================ */
@@ -43,13 +63,13 @@ body {
   color: #d1d5db;
 }
 .nav-link:hover {
-  color: #2563eb;
+  color: #0f766e;
 }
 .dark .nav-link:hover {
   color: #facc15;
 }
 .nav-link.active {
-  color: #2563eb !important;
+  color: #0f766e !important;
   font-weight: 800;
 }
 .dark .nav-link.active {

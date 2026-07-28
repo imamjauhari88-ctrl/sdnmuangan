@@ -54,7 +54,7 @@ export default async function KontakPage() {
                 🤝 Layanan Informasi
               </span>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white mb-2 sm:mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-black text-gray-900 dark:text-white mb-2 sm:mb-4">
               Mari Terhubung
             </h2>
             <div className="h-1 w-16 sm:w-20 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto rounded-full mb-4" />

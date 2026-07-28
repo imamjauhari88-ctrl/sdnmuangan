@@ -179,7 +179,7 @@ export default function KalenderBulanan({ agenda, hariLibur }: KalenderBulananPr
           >
             📅 KALENDER SEKOLAH
           </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-gray-950 dark:text-white leading-tight">
+          <h2 className="text-2xl sm:text-3xl font-serif font-black text-gray-950 dark:text-white leading-tight">
             Kalender Akademik
           </h2>
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 font-medium">

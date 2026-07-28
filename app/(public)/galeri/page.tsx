@@ -157,7 +157,7 @@ function AlbumListHeader({ cari }: { cari: string }) {
         >
           🎬 Galeri
         </span>
-        <h2 className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white">Album Kegiatan</h2>
+        <h2 className="text-3xl sm:text-4xl font-serif font-black text-gray-900 dark:text-white">Album Kegiatan</h2>
         <div className="h-1 w-16 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mt-2" aria-hidden="true" />
       </div>
 

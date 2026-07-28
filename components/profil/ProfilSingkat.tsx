@@ -17,7 +17,7 @@ export default function ProfilSingkat({ profilSingkat }: ProfilSingkatProps) {
           >
             📋 Tentang Kami
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-3">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-gray-900 dark:text-white mb-3">
             Profil Singkat
           </h2>
           <div className="h-1 w-16 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full" />

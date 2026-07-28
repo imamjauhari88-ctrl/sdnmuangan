@@ -39,7 +39,7 @@ export default function Testimoni({ testimoni }: TestimoniProps) {
           >
             💬 Kata Mereka
           </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-serif font-black text-gray-900 dark:text-white">
             Testimoni Wali Murid
           </h2>
           <div className="h-1 w-16 bg-gradient-to-r from-rose-500 to-pink-400 mx-auto rounded-full mt-3" />

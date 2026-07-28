@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { formatTanggalIndonesia } from "@/lib/utils/format";
-import type { Berita, BeritaKategori } from "@/lib/types/database";
+import { formatTanggalIndonesia, ringkasTeks, KATEGORI_LABEL, KATEGORI_BADGE_BG } from "@/lib/utils/format";
+import type { Berita } from "@/lib/types/database";
 import type { BerandaData } from "@/lib/data/beranda";
 
 interface BeritaTabsProps {
@@ -18,16 +18,10 @@ const TABS: { id: keyof BerandaData["tabBerita"]; label: string; emoji: string }
   { id: "prestasi", label: "Prestasi", emoji: "🏆" },
 ];
 
-const KATEGORI_BADGE_COLOR: Record<BeritaKategori, string> = {
-  berita: "bg-blue-600",
-  pengumuman: "bg-red-600",
-  prestasi: "bg-amber-500",
-  agenda: "bg-gray-600",
-};
-
 function BeritaCard({ b, delay }: { b: Berita; delay: number }) {
   const imgSrc = b.gambar || "https://placehold.co/600x400/e2e8f0/1e293b?text=Berita";
-  const badgeColor = KATEGORI_BADGE_COLOR[b.kategori] ?? "bg-gray-600";
+  const badgeBg = KATEGORI_BADGE_BG[b.kategori] ?? "#6b7280";
+  const badgeLabel = KATEGORI_LABEL[b.kategori] ?? b.kategori;
 
   return (
     <article
@@ -42,25 +36,29 @@ function BeritaCard({ b, delay }: { b: Berita; delay: number }) {
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        <div
-          className={`absolute top-4 right-4 ${badgeColor} text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-lg`}
+        <span
+          className="absolute top-4 right-4 text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-lg"
+          style={{ background: badgeBg }}
         >
-          {b.kategori}
-        </div>
+          {badgeLabel}
+        </span>
       </div>
       <div className="p-5 sm:p-6 flex-1 flex flex-col">
         <div className="text-xs text-gray-500 dark:text-gray-400 font-medium mb-3 flex items-center gap-2">
-          <i className="fa-regular fa-calendar-days text-blue-500" />
+          <i className="fa-regular fa-calendar-days text-teal-700" />
           <time dateTime={b.tanggal ?? undefined}>{formatTanggalIndonesia(b.tanggal)}</time>
         </div>
-        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+        <h3 className="text-lg font-serif font-bold text-gray-900 dark:text-white mb-2.5 leading-snug line-clamp-2 group-hover:text-teal-700 dark:group-hover:text-teal-400 transition-colors">
           <Link href={`/berita/${b.id}`} aria-label={`Baca artikel: ${b.judul}`}>
             <span className="absolute inset-0" aria-hidden="true" />
             {b.judul}
           </Link>
         </h3>
+        <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed flex-1 mb-4 line-clamp-3">
+          {ringkasTeks(b.isi, 150)}
+        </p>
         <div className="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700/50">
-          <span className="text-blue-600 dark:text-blue-400 text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all">
+          <span className="text-teal-700 dark:text-teal-400 text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all">
             Baca Selengkapnya <i className="fa-solid fa-arrow-right text-xs" />
           </span>
         </div>
@@ -81,15 +79,15 @@ export default function BeritaTabs({ tabBerita }: BeritaTabsProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 sm:mb-10">
           <span
-            className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full inline-block mb-3 sm:mb-4"
+            className="text-xs font-bold uppercase tracking-widest text-teal-700 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full inline-block mb-3 sm:mb-4"
             aria-hidden="true"
           >
             📰 Informasi
           </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white mb-2 sm:mb-4">
+          <h2 className="text-2xl sm:text-3xl font-serif font-black text-gray-900 dark:text-white mb-2 sm:mb-4">
             Berita &amp; Informasi
           </h2>
-          <div className="h-1 w-16 sm:w-20 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto rounded-full mb-6" />
+          <div className="h-1 w-16 sm:w-20 bg-gradient-to-r from-teal-600 to-amber-500 mx-auto rounded-full mb-6" />
         </div>
 
         {/* Tab Filter */}

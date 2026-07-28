@@ -46,7 +46,7 @@ export default function SejarahSekolah({
           >
             📚 Perjalanan
           </span>
-          <h2 className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white mb-3">
+          <h2 className="text-3xl sm:text-4xl font-serif font-black text-gray-900 dark:text-white mb-3">
             Sejarah Sekolah
           </h2>
           <div className="h-1 w-16 bg-gradient-to-r from-amber-500 to-yellow-400 mx-auto rounded-full" />

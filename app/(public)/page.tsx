@@ -2,22 +2,29 @@ import { getPengaturan, pengaturanValue } from "@/lib/data/pengaturan";
 import { getBerandaData } from "@/lib/data/beranda";
 
 import JsonLdSchool from "@/components/seo/JsonLdSchool";
-import LoadingScreen from "@/components/home/LoadingScreen";
 import Hero from "@/components/home/Hero";
 import PengumumanBanner from "@/components/home/PengumumanBanner";
 import LayananUtama from "@/components/home/LayananUtama";
-import Statistik from "@/components/home/Statistik";
-import SambutanKepsek from "@/components/home/SambutanKepsek";
-import VisiMisi from "@/components/home/VisiMisi";
-import ProfilKompak from "@/components/home/ProfilKompak";
-import KalenderBulanan from "@/components/home/KalenderBulanan";
-import FasilitasPreview from "@/components/home/FasilitasPreview";
+import ProfilSingkat from "@/components/home/ProfilSingkat";
+import AgendaRingkas from "@/components/home/AgendaRingkas";
+import FasilitasEkskul from "@/components/home/FasilitasEkskul";
 import PrestasiGaleri from "@/components/home/PrestasiGaleri";
-import Ekstrakurikuler from "@/components/home/Ekstrakurikuler";
 import BeritaTabs from "@/components/home/BeritaTabs";
-import Testimoni from "@/components/home/Testimoni";
 import MapsSection from "@/components/home/MapsSection";
-import { cldTransform, cldWide } from "@/lib/utils/cloudinary";
+
+/**
+ * Struktur beranda dirampingkan dari 14 section jadi 9:
+ * - Statistik dilebur ke Hero (strip angka, bukan section sendiri)
+ * - Sambutan Kepsek + Visi Misi + Profil Kompak digabung -> ProfilSingkat
+ *   (3 section yang isinya tumpang tindih "identitas sekolah" jadi 1)
+ * - KalenderBulanan (grid kalender penuh) diganti AgendaRingkas (list 4
+ *   agenda terdekat) di beranda; kalender penuh tetap ada di
+ *   /berita?kategori=agenda untuk yang butuh tampilan bulanan
+ * - Fasilitas + Ekstrakurikuler digabung jadi 1 section bertab
+ * - Testimoni dihapus dari beranda: untuk sekolah negeri, kredibilitas
+ *   lebih pas ditopang data resmi (akreditasi/NPSN/prestasi) daripada
+ *   pola testimoni ala produk komersial
+ */
 
 // ISR: data beranda cukup fresh dengan revalidate 60 detik
 export const revalidate = 60;
@@ -27,8 +34,8 @@ export default async function HomePage() {
 
   const namaSekolah = pengaturanValue(pengaturan, "nama_sekolah", "Nama Sekolah");
   const logoSekolah = pengaturanValue(pengaturan, "logo_sekolah", "/assets/img/logo.png");
-  const fotoSekolah = cldWide(pengaturanValue(pengaturan, "foto_sekolah", logoSekolah), 1920);
   const tahunBerdiri = pengaturanValue(pengaturan, "tahun_berdiri", "-");
+  const npsn = pengaturanValue(pengaturan, "npsn", "-");
   const fotoKepsek = pengaturanValue(pengaturan, "foto_kepsek", logoSekolah);
   const sambutanKepsek = pengaturanValue(
     pengaturan,
@@ -45,17 +52,20 @@ export default async function HomePage() {
   const jmlSiswa = parseInt(pengaturanValue(pengaturan, "jml_siswa", "0"), 10) || 0;
   const jmlGuru = parseInt(pengaturanValue(pengaturan, "jml_guru", "0"), 10) || 0;
   const jmlRombel = parseInt(pengaturanValue(pengaturan, "jml_rombel", "0"), 10) || 0;
-  const jmlPrestasiRaw = pengaturanValue(pengaturan, "jml_prestasi", "0");
-  const jmlPrestasi = parseInt(jmlPrestasiRaw.replace(/\D/g, ""), 10) || 0;
 
   return (
     <>
       <JsonLdSchool />
 
-      <LoadingScreen namaSekolah={namaSekolah} logoUrl={cldTransform(logoSekolah, "w_128,c_fit,q_auto,f_auto")} />
-
-      {/* 1. Hero */}
-      <Hero namaSekolah={namaSekolah} tahunBerdiri={tahunBerdiri} fotoSekolah={fotoSekolah} />
+      {/* 1. Hero (statistik sekolah sudah termasuk di dalamnya) */}
+      <Hero
+        namaSekolah={namaSekolah}
+        akreditasi={akreditasi}
+        npsn={npsn}
+        jmlSiswa={jmlSiswa}
+        jmlGuru={jmlGuru}
+        jmlRombel={jmlRombel}
+      />
 
       {/* 2. Pengumuman (tampil jika ada data) — info urgent harus terlihat lebih awal */}
       <PengumumanBanner pengumuman={beranda.pengumumanTerbaru} />
@@ -63,52 +73,33 @@ export default async function HomePage() {
       {/* 3. Layanan Utama / Quick Links — PPDB, CBT/Absensi, Kontak: jangan dikubur di bawah */}
       <LayananUtama />
 
-      {/* 4. Statistik */}
-      <Statistik
-        jmlSiswa={jmlSiswa}
-        jmlGuru={jmlGuru}
-        jmlRombel={jmlRombel}
-        jmlPrestasi={jmlPrestasi}
-      />
-
-      {/* 5. Sambutan Kepala Sekolah */}
-      <SambutanKepsek
+      {/* 4. Profil Singkat — gabungan Sambutan Kepsek + Visi Misi + data pokok sekolah */}
+      <ProfilSingkat
         namaSekolah={namaSekolah}
         namaKepsek={beranda.namaKepsek}
         fotoKepsek={fotoKepsek}
         sambutan={sambutanKepsek}
-      />
-
-      {/* 6. Visi & Misi (ringkas) */}
-      <VisiMisi visi={visi} misi={misi} />
-
-      {/* 7. Data Profil Kompak */}
-      <ProfilKompak
+        visi={visi}
+        misi={misi}
         statusSekolah={statusSekolah}
         akreditasi={akreditasi}
         lokasi={lokasi}
         tahunBerdiri={tahunBerdiri}
       />
 
-      {/* 8. Kalender Agenda — gabungan kalender + daftar agenda, versi calendar-grid interaktif */}
-      <KalenderBulanan agenda={beranda.semuaAgenda} hariLibur={beranda.hariLibur} />
+      {/* 5. Agenda terdekat — versi ringkas, kalender penuh ada di /berita?kategori=agenda */}
+      <AgendaRingkas agenda={beranda.semuaAgenda} />
 
-      {/* 9. Preview Fasilitas */}
-      <FasilitasPreview fasilitasList={beranda.fasilitasPreview} />
+      {/* 6. Fasilitas & Ekstrakurikuler — satu section bertab */}
+      <FasilitasEkskul fasilitasList={beranda.fasilitasPreview} ekskulList={beranda.ekskulList} />
 
-      {/* 10. Prestasi + Galeri (digabung) */}
+      {/* 7. Prestasi + Galeri (digabung) */}
       <PrestasiGaleri prestasi={beranda.prestasiTerbaru} galeri={beranda.galeriPreview} />
 
-      {/* 11. Ekstrakurikuler */}
-      <Ekstrakurikuler ekskulList={beranda.ekskulList} />
-
-      {/* 12. Berita & Informasi */}
+      {/* 8. Berita & Informasi */}
       <BeritaTabs tabBerita={beranda.tabBerita} />
 
-      {/* 13. Testimoni Wali Murid */}
-      <Testimoni testimoni={beranda.testimoni} />
-
-      {/* 14. Maps */}
+      {/* 9. Maps & Kontak — penutup beranda */}
       <MapsSection namaSekolah={namaSekolah} alamat={alamatSekolah} koordinat={koordinatMap} />
     </>
   );

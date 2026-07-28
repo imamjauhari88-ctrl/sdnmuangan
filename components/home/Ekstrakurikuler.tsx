@@ -73,10 +73,7 @@ export default function Ekstrakurikuler({ ekskulList }: EkstrakurikulerProps) {
   if (ekskulList.length === 0) return null;
 
   return (
-    <section
-      className="py-12 sm:py-16 bg-gray-50 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800"
-      aria-label="Program ekstrakurikuler sekolah"
-    >
+    <div>
       <style jsx global>{`
         @keyframes eks-fadeIn {
           from { opacity: 0; }
@@ -98,22 +95,9 @@ export default function Ekstrakurikuler({ ekskulList }: EkstrakurikulerProps) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* ── Header ── */}
-        <div className="text-center mb-10">
-          <span
-            className="text-xs font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-4 py-2 rounded-full inline-block mb-3"
-            aria-hidden="true"
-          >
-            🎨 Kegiatan Siswa
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white">
-            Ekstrakurikuler
-          </h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-            Klik kartu untuk melihat detail kegiatan
-          </p>
-          <div className="h-1 w-16 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto rounded-full mt-3" aria-hidden="true" />
-        </div>
+        <p className="text-center text-sm text-gray-500 dark:text-gray-400 mb-6 -mt-2">
+          Klik kartu untuk melihat detail kegiatan
+        </p>
 
         {/* ── Grid Kartu ── */}
         <div className="flex flex-wrap justify-center gap-4" role="list">
@@ -292,6 +276,6 @@ export default function Ekstrakurikuler({ ekskulList }: EkstrakurikulerProps) {
         </div>,
         document.body
       )}
-    </section>
+    </div>
   );
 }

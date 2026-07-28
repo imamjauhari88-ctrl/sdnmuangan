@@ -40,7 +40,7 @@ export default function StafSection({
         
         <div className="text-center mb-10">
           <span className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-4 py-2 rounded-full inline-block mb-3">👥 Tim Profesional</span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-3">Tim Profesional Kami</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-gray-900 dark:text-white mb-3">Tim Profesional Kami</h2>
           <div className="h-1 w-16 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mb-4" />
           {isFallback && (
             <p className="inline-flex items-center gap-2 bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-xs font-bold px-4 py-2 rounded-full border border-amber-200 dark:border-amber-800" role="status">

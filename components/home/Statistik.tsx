@@ -143,7 +143,7 @@ export default function Statistik({ jmlSiswa, jmlGuru, jmlRombel, jmlPrestasi }:
           >
             📊 Statistik
           </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white mb-2 sm:mb-4">
+          <h2 className="text-2xl sm:text-3xl font-serif font-black text-gray-900 dark:text-white mb-2 sm:mb-4">
             Angka-Angka Kami
           </h2>
           <div

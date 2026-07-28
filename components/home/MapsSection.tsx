@@ -33,7 +33,7 @@ export default function MapsSection({ namaSekolah, alamat, koordinat }: MapsSect
           >
             📍 Lokasi
           </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-serif font-black text-gray-900 dark:text-white">
             Temukan Kami
           </h2>
           <div className="h-1 w-16 bg-gradient-to-r from-teal-500 to-cyan-400 mx-auto rounded-full mt-3" />

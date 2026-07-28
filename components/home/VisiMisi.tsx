@@ -35,7 +35,7 @@ export default function VisiMisi({ visi, misi }: VisiMisiProps) {
           <span className="text-xs font-bold uppercase tracking-widest text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/30 px-4 py-2 rounded-full inline-block mb-3">
             🎯 Arah Sekolah
           </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-serif font-black text-gray-900 dark:text-white">
             Visi &amp; Misi
           </h2>
           <div className="h-1 w-16 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mt-3" />

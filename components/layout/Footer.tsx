@@ -82,7 +82,7 @@ export default function Footer({ pengaturan = {} }: FooterProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={soc.label}
-                    className="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-200/50 dark:bg-white/5 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition-all text-gray-600 dark:text-gray-400 cursor-pointer"
+                    className="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-200/50 dark:bg-white/5 hover:bg-teal-700 hover:text-white dark:hover:bg-teal-700 dark:hover:text-white transition-all text-gray-600 dark:text-gray-400 cursor-pointer"
                   >
                     <i className={`${soc.icon} text-lg`} />
                   </a>
@@ -101,7 +101,7 @@ export default function Footer({ pengaturan = {} }: FooterProps) {
                 <Link
                   key={m.href}
                   href={m.href}
-                  className="flex items-center gap-2 py-1.5 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors"
+                  className="flex items-center gap-2 py-1.5 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-teal-700 dark:hover:text-white transition-colors"
                 >
                   <i className={`fa-solid ${m.icon} w-4`} /> {m.label}
                 </Link>
@@ -114,7 +114,7 @@ export default function Footer({ pengaturan = {} }: FooterProps) {
             <h4 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Kontak</h4>
             <ul className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
               <li className="flex items-start gap-3">
-                <i className="fa-solid fa-location-dot text-blue-600 dark:text-blue-400 mt-1" />
+                <i className="fa-solid fa-location-dot text-teal-700 dark:text-teal-400 mt-1" />
                 <span>{alamat}</span>
               </li>
               <li className="flex items-center gap-3">
@@ -139,7 +139,7 @@ export default function Footer({ pengaturan = {} }: FooterProps) {
             href="https://wa.me/6285257796187"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 dark:text-blue-400 font-medium"
+            className="text-teal-700 dark:text-teal-400 font-medium"
           >
             Developed by @jeweller85
           </a>

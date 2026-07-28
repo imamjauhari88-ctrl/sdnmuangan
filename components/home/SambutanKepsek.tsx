@@ -78,7 +78,7 @@ export default function SambutanKepsek({
                 👋 Sambutan
               </span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black mb-6 text-gray-900 dark:text-white">
+            <h2 className="text-2xl sm:text-3xl font-serif font-black mb-6 text-gray-900 dark:text-white">
               Pesan Kepala Sekolah
             </h2>
             <div className="glass-card border border-gray-100 dark:border-gray-700 rounded-2xl p-6 md:p-8 shadow-sm relative">

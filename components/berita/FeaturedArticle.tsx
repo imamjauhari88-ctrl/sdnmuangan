@@ -53,7 +53,7 @@ export default function FeaturedArticle({ featured }: FeaturedArticleProps) {
             <i className="fa-regular fa-calendar-days" aria-hidden="true" />
             <time dateTime={featured.tanggal ?? undefined}>{formatTanggalIndonesia(featured.tanggal)}</time>
           </p>
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-white leading-tight mb-4 line-clamp-2">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-serif font-black text-white leading-tight mb-4 line-clamp-2">
             {featured.judul}
           </h2>
           <p className="text-white/70 text-sm line-clamp-2 mb-4 hidden sm:block">

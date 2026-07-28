@@ -103,7 +103,7 @@ export default function AgendaGaleriPreview({ agenda, galeri }: AgendaGaleriPrev
                 📅 Kalender
               </span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white mb-2">
+            <h2 className="text-2xl sm:text-3xl font-serif font-black text-gray-900 dark:text-white mb-2">
               Agenda Mendatang
             </h2>
             <div className="h-1 w-16 bg-gradient-to-r from-green-500 to-emerald-400 rounded-full mb-6" aria-hidden="true" />
@@ -161,7 +161,7 @@ export default function AgendaGaleriPreview({ agenda, galeri }: AgendaGaleriPrev
                 >
                   📸 Dokumentasi
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white">
+                <h2 className="text-2xl sm:text-3xl font-serif font-black text-gray-900 dark:text-white">
                   Galeri Kegiatan
                 </h2>
                 <div className="h-1 w-16 bg-gradient-to-r from-pink-500 to-rose-400 rounded-full mt-2" />

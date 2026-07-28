@@ -71,6 +71,14 @@ export const KATEGORI_LABEL: Record<string, string> = {
   prestasi: "Prestasi",
 };
 
+/** Warna badge kategori berita — dipakai di card berita beranda & halaman /berita */
+export const KATEGORI_BADGE_BG: Record<string, string> = {
+  berita: "#2563eb",
+  pengumuman: "#dc2626",
+  agenda: "#16a34a",
+  prestasi: "#d97706",
+};
+
 /** Warna badge per kategori berita (Tailwind classes) */
 export const KATEGORI_COLOR: Record<string, string> = {
   berita: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",

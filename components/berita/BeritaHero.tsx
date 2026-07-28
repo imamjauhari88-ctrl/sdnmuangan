@@ -62,7 +62,7 @@ export default function BeritaHero({ namaSekolah }: BeritaHeroProps) {
           >
             <i className="fa-solid fa-newspaper" />
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-tight drop-shadow-2xl">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-black text-white leading-tight drop-shadow-2xl">
             Informasi &amp; Berita
           </h1>
         </div>

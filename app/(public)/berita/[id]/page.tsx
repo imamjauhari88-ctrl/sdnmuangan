@@ -149,7 +149,7 @@ export default async function BeritaDetailPage({ params }: BeritaDetailPageProps
               </div>
 
               <div className="p-6 md:p-10">
-                <h1 className="text-3xl md:text-4xl font-black text-gray-800 dark:text-white leading-tight mb-6">
+                <h1 className="text-3xl md:text-4xl font-serif font-black text-gray-800 dark:text-white leading-tight mb-6">
                   {berita.judul}
                 </h1>
 
