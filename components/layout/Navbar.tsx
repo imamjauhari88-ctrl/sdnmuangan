@@ -197,15 +197,15 @@ export default function Navbar({ namaSekolah, logoSekolah, pengaturan }: NavbarP
                 const active = isActive(pathname, item);
                 return (
                   <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setMobileOpen(false)}
-                    className={`flex items-center gap-3 px-3 py-3 rounded-md font-semibold ${
-                      active ? "text-gold" : "text-ink dark:text-gray-200"
-                    }`}
-                  >
-                    <i className={`fa-solid ${item.icon} w-5`} aria-hidden="true" /> {item.label}
-                  </Link>
+  key={item.href}
+  href={item.href}
+  onClick={() => setMobileOpen(false)}
+  className={`block px-3 py-3 rounded-md font-semibold ${
+    active ? "text-gold" : "text-ink dark:text-gray-200"
+  }`}
+>
+  {item.label}
+</Link>
                 );
               })}
               <Link
