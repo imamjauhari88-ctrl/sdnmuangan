@@ -142,17 +142,16 @@ export default function Navbar({ namaSekolah, logoSekolah, pengaturan }: NavbarP
 
     return (
       <Link
-        key={item.href}
-        href={item.href}
-        className={`flex items-center gap-2 text-[14.5px] font-semibold py-2 px-1 transition-colors ${
-          active
-            ? "text-gold"
-            : "text-ink dark:text-gray-200 hover:text-gold"
-        }`}
-      >
-        <i className={`fa-solid ${item.icon} text-[13px]`} aria-hidden="true" />
-        {item.label}
-      </Link>
+  key={item.href}
+  href={item.href}
+  className={`text-[14.5px] font-semibold py-2 px-1 transition-colors ${
+    active
+      ? "text-gold"
+      : "text-ink dark:text-gray-200 hover:text-gold"
+  }`}
+>
+  {item.label}
+</Link>
     );
   })}
 </div>
