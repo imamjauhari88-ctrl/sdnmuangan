@@ -6,13 +6,30 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 import { cldTransform } from "@/lib/utils/cloudinary";
+import { pengaturanValue } from "@/lib/data/pengaturan";
+import type { PengaturanMap } from "@/lib/types/database";
 
 interface NavbarProps {
   namaSekolah: string;
   logoSekolah: string;
+  pengaturan: PengaturanMap;
 }
 
-const NAV_ITEMS = [
+interface NavItem {
+  label: string;
+  href: string;
+  icon: string;
+  activeMatch?: string[];
+}
+
+/**
+ * Susunan menu SENGAJA dipertahankan sama seperti sebelumnya (flat,
+ * tanpa dropdown). Tampilan (warna/font/top info bar/tombol PMB)
+ * mengikuti referensi beranda-sekolah.html — sudah dikonfirmasi ok
+ * dipertahankan, selama logo tidak dibungkus lingkaran dan menu aktif
+ * punya warna beda (lihat isActive + class "active" di bawah).
+ */
+const NAV_ITEMS: NavItem[] = [
   { href: "/", label: "Beranda", icon: "fa-house" },
   { href: "/profil", label: "Profil", icon: "fa-school" },
   { href: "/gtk", label: "GTK", icon: "fa-chalkboard-user" },
@@ -27,15 +44,24 @@ const NAV_ITEMS = [
   { href: "/kontak", label: "Kontak", icon: "fa-envelope" },
 ];
 
-function isActive(pathname: string, item: (typeof NAV_ITEMS)[number]): boolean {
-  const matches = item.activeMatch ?? [item.href];
-  return matches.some((m) => (m === "/" ? pathname === "/" : pathname.startsWith(m)));
+function isActive(pathname: string, item: NavItem): boolean {
+  const matches = item.activeMatch ?? (item.href ? [item.href] : []);
+  return matches.some((m) => {
+    const path = m.split("?")[0];
+    return path === "/" ? pathname === "/" : pathname.startsWith(path);
+  });
 }
 
-export default function Navbar({ namaSekolah, logoSekolah }: NavbarProps) {
+export default function Navbar({ namaSekolah, logoSekolah, pengaturan }: NavbarProps) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const telepon = pengaturanValue(pengaturan, "telepon_sekolah", "");
+  const email = pengaturanValue(pengaturan, "email_sekolah", "");
+  const alamat = pengaturanValue(pengaturan, "alamat_sekolah", "");
+  const npsn = pengaturanValue(pengaturan, "npsn", "");
+  const akreditasi = pengaturanValue(pengaturan, "akreditasi", "");
 
   useEffect(() => {
     function handleScroll() {
@@ -46,99 +72,156 @@ export default function Navbar({ namaSekolah, logoSekolah }: NavbarProps) {
   }, []);
 
   return (
-    <nav
-      className={`bg-white dark:bg-gray-800 shadow-lg sticky top-0 z-50 transition-colors ${
-        scrolled ? "navbar-scrolled" : ""
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
-          <Link href="/" className="flex items-center">
-            <Image
-  src={cldTransform(logoSekolah, "w_160,c_fit,q_auto,f_auto")}
-  alt="Logo Sekolah"
-  width={40}
-  height={40}
-  className="w-10 h-10 mr-3 rounded-lg object-contain"
-/>
-            <div>
-              <h1 
-                className="text-base sm:text-base md:text-lg lg:text-xl font-bold text-gray-800 dark:text-white leading-tight truncate"
-                title={namaSekolah}
-              >
-                {namaSekolah}
-              </h1>
-              <p className="text-xs text-gray-600 dark:text-gray-300">Sekolah Dasar Negeri</p>
+    <>
+      {/* ============ TOP INFO BAR ============ */}
+      {(telepon || email || (alamat && alamat !== "-") || (npsn && npsn !== "-")) && (
+        <div className="hidden sm:block bg-navy-2 text-paper/60">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-2 font-mono text-[11px] tracking-wide">
+            <div className="flex gap-5">
+              {telepon && (
+                <span className="flex items-center gap-1.5">
+                  <i className="fa-solid fa-phone text-[10px]" aria-hidden="true" /> {telepon}
+                </span>
+              )}
+              {email && (
+                <span className="hidden md:flex items-center gap-1.5">
+                  <i className="fa-solid fa-envelope text-[10px]" aria-hidden="true" /> {email}
+                </span>
+              )}
+              {alamat && alamat !== "-" && (
+                <span className="hidden lg:flex items-center gap-1.5">
+                  <i className="fa-solid fa-location-dot text-[10px]" aria-hidden="true" /> {alamat}
+                </span>
+              )}
             </div>
-          </Link>
-
-          {/* Desktop nav */}
-          <div className="hidden lg:flex items-center space-x-5 text-sm xl:text-base font-medium">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`nav-link flex items-center gap-2 ${
-                  isActive(pathname, item) ? "active" : ""
-                }`}
-              >
-                <i className={`fa-solid ${item.icon}`} /> {item.label}
-              </Link>
-            ))}
-
-            <div className="flex items-center gap-2 border-l pl-4 dark:border-gray-700">
-              <ThemeToggle variant="desktop" />
-              <Link
-  href="/admin/login"
-  className="p-2 rounded-lg bg-teal-700 text-white hover:bg-teal-800 transition-all shadow-md"
-  title="Login Admin"
-  aria-label="Login Admin"
->
-                <i className="fa-solid fa-user-shield" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Mobile controls */}
-          <div className="lg:hidden flex items-center gap-2">
-            <ThemeToggle variant="mobile" />
-            <button
-              onClick={() => setMobileOpen((v) => !v)}
-              className="p-2 text-gray-600 dark:text-gray-300 text-2xl outline-none"
-              aria-label="Buka menu"
-            >
-              <i className={`fa-solid ${mobileOpen ? "fa-xmark" : "fa-bars"}`} />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="lg:hidden bg-white dark:bg-gray-800 border-t dark:border-gray-700 shadow-inner">
-          <div className="px-4 pt-2 pb-6 space-y-1">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileOpen(false)}
-                className={`nav-link flex items-center gap-3 px-3 py-3 rounded-md ${
-                  isActive(pathname, item) ? "active bg-teal-50 dark:bg-gray-700" : ""
-                }`}
-              >
-                <i className={`fa-solid ${item.icon} w-5`} /> {item.label}
-              </Link>
-            ))}
-            <Link
-              href="/admin/login"
-              onClick={() => setMobileOpen(false)}
-              className="w-full text-left flex items-center gap-3 px-3 py-3 rounded-md text-teal-700 dark:text-teal-400 font-bold hover:bg-teal-50 dark:hover:bg-gray-700 transition"
-            >
-              <i className="fa-solid fa-user-shield w-5" /> Login Admin
-            </Link>
+            {((npsn && npsn !== "-") || (akreditasi && akreditasi !== "-")) && (
+              <span className="text-gold-light">
+                {npsn && npsn !== "-" ? `NPSN ${npsn}` : ""}
+                {npsn && npsn !== "-" && akreditasi && akreditasi !== "-" ? " · " : ""}
+                {akreditasi && akreditasi !== "-" ? `Terakreditasi ${akreditasi}` : ""}
+              </span>
+            )}
           </div>
         </div>
       )}
-    </nav>
+
+      {/* ============ NAV UTAMA ============ */}
+      <nav
+        className={`sticky top-0 z-50 bg-paper/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-line dark:border-gray-800 transition-shadow ${
+          scrolled ? "shadow-md" : ""
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-[78px]">
+            {/* Logo polos, TIDAK dibungkus lingkaran */}
+            <Link href="/" className="flex items-center">
+              <Image
+                src={cldTransform(logoSekolah, "w_160,c_fit,q_auto,f_auto")}
+                alt="Logo Sekolah"
+                width={40}
+                height={40}
+                className="w-10 h-10 mr-3 object-contain"
+              />
+              <div>
+                <h1
+                  className="font-serif text-base sm:text-base md:text-lg lg:text-xl font-bold text-navy-2 dark:text-white leading-tight truncate"
+                  title={namaSekolah}
+                >
+                  {namaSekolah}
+                </h1>
+                <p className="font-mono text-[10px] text-ink/60 dark:text-gray-400 tracking-wide">
+                  JENJANG SD &middot; KURIKULUM MERDEKA
+                </p>
+              </div>
+            </Link>
+
+            {/* Desktop nav */}
+            <div className="hidden lg:flex items-center gap-6">
+              {NAV_ITEMS.map((item) => {
+                const active = isActive(pathname, item);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`navlink flex items-center gap-2 text-[14.5px] py-2 px-1 rounded-md transition-colors ${
+                      active
+                        ? "active font-bold text-gold bg-gold/10"
+                        : "font-semibold text-ink dark:text-gray-200"
+                    }`}
+                  >
+                    <i className={`fa-solid ${item.icon} text-[13px]`} aria-hidden="true" /> {item.label}
+                  </Link>
+                );
+              })}
+            </div>
+
+            <div className="hidden lg:flex items-center gap-3">
+              <ThemeToggle variant="desktop" />
+              <Link
+                href="/admin/login"
+                className="font-semibold text-sm text-navy-2 dark:text-gray-200 px-1.5 py-2 hover:text-gold transition-colors"
+              >
+                Masuk
+              </Link>
+              <Link
+                href="/ppdb"
+                className="bg-navy text-paper font-bold text-sm px-5 py-2.5 hover:bg-navy-2 transition-colors"
+              >
+                Daftar PMB
+              </Link>
+            </div>
+
+            {/* Mobile controls */}
+            <div className="lg:hidden flex items-center gap-2">
+              <ThemeToggle variant="mobile" />
+              <button
+                onClick={() => setMobileOpen((v) => !v)}
+                className="p-2 text-navy-2 dark:text-gray-300 text-2xl outline-none"
+                aria-label="Buka menu"
+              >
+                <i className={`fa-solid ${mobileOpen ? "fa-xmark" : "fa-bars"}`} />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile menu */}
+        {mobileOpen && (
+          <div className="lg:hidden bg-paper dark:bg-gray-900 border-t border-line dark:border-gray-800 shadow-inner">
+            <div className="px-4 pt-2 pb-6 space-y-1">
+              {NAV_ITEMS.map((item) => {
+                const active = isActive(pathname, item);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={`flex items-center gap-3 px-3 py-3 rounded-md font-semibold ${
+                      active ? "text-gold bg-gold/10 font-bold" : "text-ink dark:text-gray-200"
+                    }`}
+                  >
+                    <i className={`fa-solid ${item.icon} w-5`} aria-hidden="true" /> {item.label}
+                  </Link>
+                );
+              })}
+              <Link
+                href="/admin/login"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-2 px-3 py-3 rounded-md text-navy-2 dark:text-gray-200 font-bold hover:bg-paper-2 dark:hover:bg-gray-800"
+              >
+                <i className="fa-solid fa-user-shield w-4" aria-hidden="true" /> Masuk
+              </Link>
+              <Link
+                href="/ppdb"
+                onClick={() => setMobileOpen(false)}
+                className="block text-center mt-2 bg-navy text-paper font-bold px-3 py-3"
+              >
+                Daftar PMB
+              </Link>
+            </div>
+          </div>
+        )}
+      </nav>
+    </>
   );
 }

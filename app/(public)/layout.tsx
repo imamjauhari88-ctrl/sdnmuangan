@@ -24,7 +24,7 @@ export default async function PublicLayout({ children }: { children: React.React
 
   return (
     <>
-      <Navbar namaSekolah={namaSekolah} logoSekolah={logoSekolah} />
+      <Navbar namaSekolah={namaSekolah} logoSekolah={logoSekolah} pengaturan={pengaturan} />
       <main className="flex-1">{children}</main>
       <Footer pengaturan={pengaturan} />
     </>

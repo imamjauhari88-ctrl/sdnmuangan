@@ -91,7 +91,9 @@ export default async function HomePage() {
       <AgendaRingkas agenda={beranda.semuaAgenda} />
 
       {/* 6. Fasilitas & Ekstrakurikuler — satu section bertab */}
-      <FasilitasEkskul fasilitasList={beranda.fasilitasPreview} ekskulList={beranda.ekskulList} />
+      <div id="fasilitas" className="scroll-mt-16">
+        <FasilitasEkskul fasilitasList={beranda.fasilitasPreview} ekskulList={beranda.ekskulList} />
+      </div>
 
       {/* 7. Prestasi + Galeri (digabung) */}
       <PrestasiGaleri prestasi={beranda.prestasiTerbaru} galeri={beranda.galeriPreview} />
