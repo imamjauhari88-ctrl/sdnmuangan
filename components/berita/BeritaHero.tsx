@@ -10,16 +10,12 @@ export default function BeritaHero({ namaSekolah }: BeritaHeroProps) {
     >
       {/* Background Gradient */}
       <div
-        className="absolute inset-0 bg-gradient-to-br from-cyan-700 via-blue-800 to-indigo-900 dark:from-gray-900 dark:via-slate-800 dark:to-gray-900"
+        className="absolute inset-0 bg-gradient-to-br from-teal-950 via-teal-900 to-slate-950 dark:from-slate-950 dark:via-slate-900 dark:to-black"
         aria-hidden="true"
       />
 
-      {/* 3 Bola Cahaya (Blobs) */}
-      <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-        <div className="absolute -top-40 -right-40 w-72 h-72 bg-cyan-400 rounded-full filter blur-3xl opacity-20 animate-blob" />
-        <div className="absolute -bottom-40 -left-40 w-72 h-72 bg-blue-400 rounded-full filter blur-3xl opacity-20 animate-blob animation-delay-2000" />
-        <div className="absolute top-1/2 left-1/3 w-72 h-72 bg-indigo-400 rounded-full filter blur-3xl opacity-15 animate-blob animation-delay-4000" />
-      </div>
+      <div className="absolute -top-32 -right-32 w-96 h-96 bg-teal-400/10 rounded-full blur-3xl" aria-hidden="true" />
+      <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-amber-400/5 rounded-full blur-3xl" aria-hidden="true" />
 
       {/* Background Floating SVGs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
@@ -45,7 +41,7 @@ export default function BeritaHero({ namaSekolah }: BeritaHeroProps) {
 
       {/* Grid Pattern Overlay */}
       <div
-        className="absolute inset-0 opacity-20"
+        className="absolute inset-0 opacity-[0.06]"
         aria-hidden="true"
         style={{
           backgroundImage:
@@ -57,7 +53,7 @@ export default function BeritaHero({ namaSekolah }: BeritaHeroProps) {
       <div className="relative z-10 max-w-4xl mx-auto text-center">
         <div className="flex flex-col items-center gap-4 mb-5">
           <div
-            className="w-16 h-16 rounded-2xl bg-white/20 border border-white/30 flex items-center justify-center text-4xl text-white shadow-lg"
+            className="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-4xl text-amber-400 shadow-lg"
             aria-hidden="true"
           >
             <i className="fa-solid fa-newspaper" />
@@ -67,25 +63,19 @@ export default function BeritaHero({ namaSekolah }: BeritaHeroProps) {
           </h1>
         </div>
         
-        <p className="text-lg text-blue-100 max-w-2xl mx-auto mb-8 font-light leading-relaxed">
+        <p className="text-lg text-teal-100/80 max-w-2xl mx-auto mb-8 font-light leading-relaxed">
           Dapatkan informasi terbaru kegiatan, pengumuman, dan agenda di{" "}
           <span className="font-bold text-white">{namaSekolah}</span>
         </p>
 
         <a
           href="#berita-section"
-          className="inline-flex items-center gap-2 bg-white text-blue-700 px-8 py-4 rounded-xl font-bold text-sm hover:shadow-xl hover:scale-105 transition-all active:scale-95"
+          className="inline-flex items-center gap-2 bg-amber-400 hover:bg-amber-300 text-teal-950 px-8 py-4 rounded-lg font-bold text-sm hover:shadow-lg hover:shadow-amber-400/20 transition-all active:scale-95"
         >
           <i className="fa-solid fa-arrow-down text-sm" aria-hidden="true" /> 
           Jelajahi Berita
         </a>
       </div>
-
-      {/* Gradient Bottom Overlay */}
-      <div
-        className="absolute inset-0 bg-gradient-to-t from-gray-50 dark:from-gray-900 via-transparent to-transparent pointer-events-none"
-        aria-hidden="true"
-      />
     </section>
   );
 }

@@ -81,10 +81,10 @@ function CounterCard({
         <i className={`fa-solid ${icon}`} />
       </div>
       <div className="flex items-end gap-0.5">
-        <span className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white">
+        <span className="font-serif text-4xl sm:text-5xl font-black text-gray-900 dark:text-white">
           {count.toLocaleString("id-ID")}
         </span>
-        <span className="text-2xl font-black text-gray-900 dark:text-white mb-1">+</span>
+        <span className="font-serif text-2xl font-black text-gray-900 dark:text-white mb-1">+</span>
       </div>
       <p className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mt-1">
         {label}
@@ -156,7 +156,7 @@ export default function InfoSekolah({
                 <p className="text-[10px] sm:text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-1">
                   {item.label}
                 </p>
-                <h3 className="text-sm sm:text-base font-black text-gray-900 dark:text-white">
+                <h3 className="font-serif text-sm sm:text-base font-black text-gray-900 dark:text-white">
                   {item.value}
                 </h3>
               </div>

@@ -70,14 +70,14 @@ export default function AnchorNav() {
                 aria-current={isActive ? "true" : "false"}
                 className={`flex items-center gap-2 py-1 px-2 rounded-md text-[11px] font-bold uppercase tracking-wider transition-colors duration-200
                   ${isActive 
-                    ? "text-blue-600 dark:text-blue-400" 
+                    ? "text-amber-600 dark:text-amber-400" 
                     : "text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
                   }`}
               >
                 {/* Ikon yang selalu tampil */}
                 <i 
                   className={`fa-solid ${s.icon} text-xs ${
-                    isActive ? "text-blue-600 dark:text-blue-400" : "text-gray-400 dark:text-gray-500"
+                    isActive ? "text-amber-600 dark:text-amber-400" : "text-gray-400 dark:text-gray-500"
                   }`} 
                   aria-hidden="true" 
                 />

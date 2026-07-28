@@ -68,35 +68,6 @@ h2 {
 }
 
 /* ============================================================
-   NAVBAR LINK — garis bawah gold saat hover
-   Dari referensi beranda-sekolah.html (.navlink). Menggantikan
-   .nav-link lama (warna teal/kuning) karena Navbar.tsx sudah
-   direkonstruksi ke palet navy/gold — tidak ada komponen lain yang
-   masih pakai .nav-link, jadi aman diganti alih-alih ditumpuk.
-   ============================================================ */
-.navlink {
-  position: relative;
-}
-.navlink::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -2px;
-  height: 2px;
-  background: var(--color-gold);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.2s ease;
-}
-.navlink:hover::after {
-  transform: scaleX(1);
-}
-.navlink.active::after {
-  transform: scaleX(1);
-}
-
-/* ============================================================
    FOOTER LIST RESET
    Mencegah bullet/icon bocor dari override halaman lain
    ============================================================ */

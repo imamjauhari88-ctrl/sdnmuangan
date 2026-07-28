@@ -18,7 +18,6 @@ interface NavbarProps {
 interface NavItem {
   label: string;
   href: string;
-  icon: string;
   activeMatch?: string[];
 }
 
@@ -28,20 +27,21 @@ interface NavItem {
  * mengikuti referensi beranda-sekolah.html — sudah dikonfirmasi ok
  * dipertahankan, selama logo tidak dibungkus lingkaran dan menu aktif
  * punya warna beda (lihat isActive + class "active" di bawah).
+ * Ikon di tiap menu sengaja dihapus — teks polos lebih pas sama gaya
+ * editorial font Fraunces + gold yang sekarang.
  */
 const NAV_ITEMS: NavItem[] = [
-  { href: "/", label: "Beranda", icon: "fa-house" },
-  { href: "/profil", label: "Profil", icon: "fa-school" },
-  { href: "/gtk", label: "GTK", icon: "fa-chalkboard-user" },
-  { href: "/galeri", label: "Galeri", icon: "fa-image" },
+  { href: "/", label: "Beranda" },
+  { href: "/profil", label: "Profil" },
+  { href: "/gtk", label: "GTK" },
+  { href: "/galeri", label: "Galeri" },
   {
     href: "/berita",
     label: "Informasi",
-    icon: "fa-circle-info",
     // Halaman yang juga harus membuat menu "Informasi" aktif
     activeMatch: ["/berita", "/agenda-pengumuman"],
   },
-  { href: "/kontak", label: "Kontak", icon: "fa-envelope" },
+  { href: "/kontak", label: "Kontak" },
 ];
 
 function isActive(pathname: string, item: NavItem): boolean {
@@ -135,41 +135,46 @@ export default function Navbar({ namaSekolah, logoSekolah, pengaturan }: NavbarP
               </div>
             </Link>
 
-            {/* Desktop nav */}
-            <div className="hidden lg:flex items-center gap-6">
-              {NAV_ITEMS.map((item) => {
-                const active = isActive(pathname, item);
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`navlink flex items-center gap-2 text-[14.5px] py-2 px-1 rounded-md transition-colors ${
-                      active
-                        ? "active font-bold text-gold bg-gold/10"
-                        : "font-semibold text-ink dark:text-gray-200"
-                    }`}
-                  >
-                    <i className={`fa-solid ${item.icon} text-[13px]`} aria-hidden="true" /> {item.label}
-                  </Link>
-                );
-              })}
-            </div>
+           {/* Desktop nav */}
+<div className="hidden lg:flex flex-1 items-end justify-end gap-4">
+  {NAV_ITEMS.map((item) => {
+    const active = isActive(pathname, item);
 
-            <div className="hidden lg:flex items-center gap-3">
-              <ThemeToggle variant="desktop" />
-              <Link
-                href="/admin/login"
-                className="font-semibold text-sm text-navy-2 dark:text-gray-200 px-1.5 py-2 hover:text-gold transition-colors"
-              >
-                Masuk
-              </Link>
-              <Link
-                href="/ppdb"
-                className="bg-navy text-paper font-bold text-sm px-5 py-2.5 hover:bg-navy-2 transition-colors"
-              >
-                Daftar PMB
-              </Link>
-            </div>
+    return (
+      <Link
+        key={item.href}
+        href={item.href}
+        className={`flex items-center gap-2 text-[14.5px] font-semibold py-2 px-1 transition-colors ${
+          active
+            ? "text-gold"
+            : "text-ink dark:text-gray-200 hover:text-gold"
+        }`}
+      >
+        <i className={`fa-solid ${item.icon} text-[13px]`} aria-hidden="true" />
+        {item.label}
+      </Link>
+    );
+  })}
+</div>
+
+{/* Action kanan */}
+<div className="hidden lg:flex items-center gap-3 ml-8 pl-8 border-l border-gray-300 dark:border-gray-700">
+  <ThemeToggle variant="desktop" />
+
+  <Link
+    href="/admin/login"
+    className="font-semibold text-sm text-navy-2 dark:text-gray-200 px-1.5 py-2 hover:text-gold transition-colors"
+  >
+    Masuk
+  </Link>
+
+  <Link
+    href="/ppdb"
+    className="bg-navy text-paper font-bold text-sm px-5 py-2.5 hover:bg-navy-2 transition-colors"
+  >
+    Daftar PMB
+  </Link>
+</div>
 
             {/* Mobile controls */}
             <div className="lg:hidden flex items-center gap-2">
@@ -197,7 +202,7 @@ export default function Navbar({ namaSekolah, logoSekolah, pengaturan }: NavbarP
                     href={item.href}
                     onClick={() => setMobileOpen(false)}
                     className={`flex items-center gap-3 px-3 py-3 rounded-md font-semibold ${
-                      active ? "text-gold bg-gold/10 font-bold" : "text-ink dark:text-gray-200"
+                      active ? "text-gold" : "text-ink dark:text-gray-200"
                     }`}
                   >
                     <i className={`fa-solid ${item.icon} w-5`} aria-hidden="true" /> {item.label}
