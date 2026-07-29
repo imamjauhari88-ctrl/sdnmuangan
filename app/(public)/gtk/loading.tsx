@@ -9,7 +9,7 @@ export default function GtkLoading() {
   return (
     <div aria-busy="true" aria-label="Memuat halaman guru dan tenaga kependidikan">
       {/* HERO */}
-      <section className="relative w-full min-h-[50vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-700 via-indigo-800 to-slate-900 px-4">
+      <section className="relative w-full min-h-[calc(100dvh-var(--header-h))] flex items-center justify-center overflow-hidden bg-gradient-to-br from-teal-950 via-teal-900 to-slate-950 px-4">
         <div className="relative z-10 max-w-3xl w-full text-center">
           <div className="skeleton h-8 w-40 rounded-full mx-auto mb-6 bg-white/10" />
           <div className="skeleton h-10 sm:h-12 w-full max-w-xl rounded-xl mx-auto mb-6 bg-white/10" />

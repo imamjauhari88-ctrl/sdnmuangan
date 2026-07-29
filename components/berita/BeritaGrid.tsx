@@ -69,7 +69,7 @@ export default function BeritaGrid({ items, cariActive }: BeritaGridProps) {
                 <time dateTime={b.tanggal ?? undefined}>{formatTanggalIndonesia(b.tanggal)}</time>
               </div>
 
-              <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-2.5 leading-snug line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              <h3 className="text-base sm:text-lg font-serif font-bold text-gray-900 dark:text-white mb-2.5 leading-snug line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                 <Link href={`/berita/${b.id}`} aria-label={`Baca: ${b.judul}`}>
                   <span className="absolute inset-0" aria-hidden="true" />
                   {b.judul}

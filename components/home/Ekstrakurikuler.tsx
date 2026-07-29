@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { cldThumb } from "@/lib/utils/cloudinary";
 import type { EkskulWithPreview } from "@/lib/data/beranda";
+import { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
 
 interface EkstrakurikulerProps {
   ekskulList: EkskulWithPreview[];
@@ -65,10 +66,7 @@ export default function Ekstrakurikuler({ ekskulList }: EkstrakurikulerProps) {
   }, []);
 
   // Kunci scroll body saat modal terbuka
-  useEffect(() => {
-    document.body.style.overflow = activeIndex !== null ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [activeIndex]);
+  useLockBodyScroll(activeIndex !== null);
 
   if (ekskulList.length === 0) return null;
 

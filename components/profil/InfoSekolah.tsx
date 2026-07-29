@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { getWarna, type WarnaKey } from "@/lib/utils/warna";
+import { useCountUp } from "@/hooks/useCountUp";
 
 interface InfoSekolahProps {
   npsn: string;
@@ -28,47 +28,8 @@ function CounterCard({
   label: string;
   value: number;
 }) {
-  const [count, setCount] = useState(0);
-  const [hasCounted, setHasCounted] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const { count, ref } = useCountUp<HTMLDivElement>(value, { duration: 1800 });
   const w = getWarna(warna);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting && !hasCounted) {
-            setHasCounted(true);
-            if (value === 0) {
-              setCount(0);
-              continue;
-            }
-            const duration = 1800;
-            const incrementMs = 16;
-            const increment = value / (duration / incrementMs);
-            let current = 0;
-            const interval = setInterval(() => {
-              current += increment;
-              if (current >= value) {
-                setCount(value);
-                clearInterval(interval);
-              } else {
-                setCount(Math.floor(current));
-              }
-            }, incrementMs);
-            observer.unobserve(el);
-          }
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [hasCounted, value]);
 
   return (
     <div

@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getWarna } from "@/lib/utils/warna";
 import type { FasilitasWithCount } from "@/lib/data/profil";
+import { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
 
 interface FasilitasSectionProps {
   fasilitasList: FasilitasWithCount[];
@@ -24,10 +25,7 @@ export default function FasilitasSection({ fasilitasList }: FasilitasSectionProp
   }, []);
 
   // Kunci scroll body saat modal terbuka
-  useEffect(() => {
-    document.body.style.overflow = activeIndex !== null ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [activeIndex]);
+  useLockBodyScroll(activeIndex !== null);
 
   return (
     <section

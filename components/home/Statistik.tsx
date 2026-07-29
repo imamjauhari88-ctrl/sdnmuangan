@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCountUp } from "@/hooks/useCountUp";
 
 interface StatItem {
   icon: string;
@@ -20,47 +20,7 @@ interface StatistikProps {
 
 /** Satu kartu statistik dengan counter animation saat masuk viewport */
 function StatCard({ stat, delay }: { stat: StatItem; delay: number }) {
-  const [count, setCount] = useState(0);
-  const [hasCounted, setHasCounted] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasCounted) {
-            setHasCounted(true);
-            const target = stat.value;
-            if (target === 0) {
-              setCount(0);
-              return;
-            }
-            const duration = 2000;
-            const incrementMs = 16;
-            const increment = target / (duration / incrementMs);
-            let current = 0;
-            const interval = setInterval(() => {
-              current += increment;
-              if (current >= target) {
-                setCount(target);
-                clearInterval(interval);
-              } else {
-                setCount(Math.floor(current));
-              }
-            }, incrementMs);
-            observer.unobserve(el);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [hasCounted, stat.value]);
+  const { count, ref } = useCountUp<HTMLDivElement>(stat.value, { duration: 2000 });
 
   return (
     <div

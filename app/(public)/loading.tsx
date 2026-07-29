@@ -16,7 +16,7 @@ export default function BerandaLoading() {
   return (
     <div aria-busy="true" aria-label="Memuat halaman beranda">
       {/* HERO */}
-      <section className="relative w-full overflow-hidden bg-gradient-to-br from-teal-950 via-teal-900 to-slate-950">
+      <section className="relative w-full min-h-[calc(100dvh-var(--header-h))] flex items-center overflow-hidden bg-gradient-to-br from-teal-950 via-teal-900 to-slate-950">
         <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 py-16 sm:py-20 lg:py-24">
           <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16">
             {/* KIRI: badge, judul, deskripsi, tombol */}

@@ -19,7 +19,7 @@ export default function ProfilHero({
 
   return (
     <section
-      className="relative w-full min-h-[85vh] sm:min-h-[75vh] flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pt-20 pb-10 bg-gradient-to-br from-teal-950 via-teal-900 to-slate-950 dark:from-slate-950 dark:via-slate-900 dark:to-black"
+      className="relative w-full min-h-[calc(100dvh-var(--header-h))] flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-teal-950 via-teal-900 to-slate-950 dark:from-slate-950 dark:via-slate-900 dark:to-black"
       aria-label={`Halaman Profil ${namaSekolah}`}
     >
       {/* Grid pattern halus — sama seperti Hero beranda */}

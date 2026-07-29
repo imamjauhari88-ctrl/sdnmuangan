@@ -59,7 +59,7 @@ export default function Hero({
 
   return (
     <section
-      className="relative w-full overflow-hidden bg-gradient-to-br from-teal-950 via-teal-900 to-slate-950 dark:from-slate-950 dark:via-slate-900 dark:to-black"
+      className="relative w-full min-h-[calc(100dvh-var(--header-h))] flex items-center overflow-hidden bg-gradient-to-br from-teal-950 via-teal-900 to-slate-950 dark:from-slate-950 dark:via-slate-900 dark:to-black"
       aria-label={`Halaman utama ${namaSekolah}`}
     >
       {/* Grid pattern halus */}

@@ -9,7 +9,7 @@ export default function ProfilLoading() {
   return (
     <div aria-busy="true" aria-label="Memuat profil sekolah">
       {/* HERO */}
-      <section className="relative w-full min-h-[80vh] sm:min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-cyan-700 via-blue-800 to-indigo-900 px-4">
+      <section className="relative w-full min-h-[calc(100dvh-var(--header-h))] flex items-center justify-center overflow-hidden bg-gradient-to-br from-teal-950 via-teal-900 to-slate-950 px-4">
         <div className="relative z-10 max-w-3xl w-full text-center">
           <div className="skeleton h-8 w-40 rounded-full mx-auto mb-6 bg-white/10" />
           <div className="skeleton h-12 sm:h-14 w-full max-w-xl rounded-xl mx-auto mb-4 bg-white/10" />

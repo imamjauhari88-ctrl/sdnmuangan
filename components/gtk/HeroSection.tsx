@@ -12,7 +12,7 @@ interface HeroSectionProps {
 
 export default function HeroSection({ namaSekolah, stats, isLoading = false }: HeroSectionProps) {
   return (
-    <section className="relative w-full min-h-screen sm:min-h-[70vh] flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pt-20 bg-gradient-to-br from-teal-950 via-teal-900 to-slate-950 dark:from-slate-950 dark:via-slate-900 dark:to-black">
+    <section className="relative w-full min-h-[calc(100dvh-var(--header-h))] flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-teal-950 via-teal-900 to-slate-950 dark:from-slate-950 dark:via-slate-900 dark:to-black">
       <div
         className="absolute inset-0 opacity-[0.06]"
         style={{

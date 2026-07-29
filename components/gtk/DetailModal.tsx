@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { ParsedGTKMember, Berkas } from './types';
 import { getColorMap, getBerkasIcon } from './constants';
+import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
 
 interface DetailModalProps {
   selectedGtk: ParsedGTKMember | null;
@@ -18,10 +19,7 @@ export default function DetailModal({ selectedGtk, onClose }: DetailModalProps) 
   }, []);
 
   // Kunci scroll body saat modal terbuka
-  useEffect(() => {
-    document.body.style.overflow = selectedGtk ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [selectedGtk]);
+  useLockBodyScroll(!!selectedGtk);
 
   if (!selectedGtk || !mounted) return null;
 

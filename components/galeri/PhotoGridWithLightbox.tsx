@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { cldThumb, cldOptimized } from "@/lib/utils/cloudinary";
 import type { Foto } from "@/lib/types/database";
+import { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
 
 interface PhotoGridWithLightboxProps {
   fotoList: Foto[];
@@ -66,12 +67,7 @@ export default function PhotoGridWithLightbox({ fotoList }: PhotoGridWithLightbo
   }, [isOpen, navLB]);
 
   // Lock body scroll saat lightbox terbuka
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
+  useLockBodyScroll(isOpen);
 
   // Scroll thumbnail aktif ke tengah
   useEffect(() => {

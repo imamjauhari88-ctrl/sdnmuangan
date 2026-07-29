@@ -11,6 +11,19 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* Tinggi gabungan top info bar + navbar utama. Nilai di bawah cuma
+     fallback (dipakai sebelum JS sempat mengukur) — nilai sebenarnya
+     di-set otomatis lewat ResizeObserver di Navbar.tsx (lihat headerRef),
+     supaya section hero (min-h-[calc(100dvh-var(--header-h))]) selalu
+     pas walau tinggi navbar berubah (font baru selesai load, dst). */
+  --header-h: 79px;
+}
+
+@media (min-width: 640px) {
+  :root {
+    /* >= sm: top info bar (telepon/email/alamat) ikut tampil */
+    --header-h: 119px;
+  }
 }
 
 @theme inline {
